@@ -246,17 +246,19 @@ public class LoginActivity extends AppCompatActivity implements AppLaunchActions
 
             if (success) {
                 AcmeBankManager.getInstance().setApplicationUser(mEmailView.getText().toString());
+
+                //Initialize the app details
                 AppLaunch.getInstance().initApp(getApplication(), BMSClient.REGION_US_SOUTH,"b41c5e9c-d837-495f-a9a9-c2e359230d24","d4d0050c-b718-4a3b-9b56-585e081d8766");
 
+                //include any additional parameters
                 AppLaunchParameters appLaunchParameters = new AppLaunchParameters();
-
                 if("norton".equals(mEmailView.getText().toString())){
                     appLaunchParameters.put("customerType","platinum");
                 }else{
                     appLaunchParameters.put("customerType","silver");
                 }
 
-
+                //register the application user
                 AppLaunch.getInstance().registerUser(mEmailView.getText().toString(),appLaunchParameters, new AppLaunchResponseListener() {
                     @Override
                     public void onSuccess(AppLaunchResponse appLaunchResponse) {
